@@ -36,3 +36,15 @@ data Four' a b = Four' a a a b deriving (Show, Eq)
 
 instance Functor (Four' a) where
   fmap f (Four' a b c d) = Four' a b c (f d)
+
+data Possibly a = LolNope | Yeppers a deriving (Show, Eq)
+
+instance Functor Possibly where
+  fmap f LolNope = LolNope
+  fmap f (Yeppers a) = Yeppers (f a)
+
+data Sum a b = First a | Second b deriving (Show, Eq)
+
+instance Functor (Sum a) where
+  fmap f (First a) = First a
+  fmap f (Second b) = Second (f b)
